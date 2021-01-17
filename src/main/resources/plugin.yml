@@ -1,0 +1,31 @@
+name: ${name}
+main: ${main}
+version: ${version}
+authors: ['ElaBosak233']
+
+api-version: 1.13
+
+lib-download: true
+lib-version: ${libVersion}
+loader-version: ${loaderVersion}
+
+commands:
+  authy:
+    description: EusAuthy 的主要命令
+    usage: /authy <subcommand> [props]
+    permission: authy.general
+  2fa:
+    description: EusAuthy 在登录时使用，以供输入身份验证码
+    usage: /2fa <code>
+    permission: 2fa.general
+
+permissions:
+    authy.general:
+      description: EusAuthy 的主要权限
+      default: true
+    authy.op:
+      description: EusAuthy 的管理员权限
+      default: op
+    2fa.general:
+      description: EusAuthy 2FA 的主要权限
+      default: true

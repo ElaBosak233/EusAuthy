@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'io.izzel.taboolib' version '1.2'
+}
+
+group = 'cn.ac.ela.eusauthy'
+version = '1.0.0'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+taboolib {
+    tabooLibVersion = '5.44'
+    loaderVersion = '2.8'
+    classifier = null
+}
+
+repositories {
+    mavenCentral()
+    maven {url 'https://jitpack.io'}
+}
+
+dependencies {
+    //TabooLib
+    compile 'ink.ptms.core:v11600:11600:all'
+    compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
+    //Dependencies
+    taboo 'de.taimos:totp:1.0'
+    taboo 'commons-codec:commons-codec:1.10'
+    taboo 'com.google.zxing:javase:3.2.1'
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.16.10'
+    annotationProcessor 'org.projectlombok:lombok:1.16.10'
+    testCompileOnly 'org.projectlombok:lombok:1.16.10'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.16.10'
+}
+
+processResources {
+    from(sourceSets.main.allSource) {
+        exclude 'plugin.yml'
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        include 'plugin.yml'
+        expand(
+                name: rootProject.name,
+                main: project.group + ".boot.PluginBoot",
+                version: project.version,
+                libVersion: taboolib.tabooLibVersion,
+                loaderVersion: taboolib.loaderVersion
+        )
+    }
+}
