@@ -15,8 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+/**
+ * @author ElaBosak
+ */
 public class Cmd2FA implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String string, String[] args) {
@@ -26,28 +28,33 @@ public class Cmd2FA implements TabExecutor {
         }
         if (sender instanceof Player && sender.hasPermission("2fa.general")) {
             Player p = (Player) sender;
-            if (!EusAuthy.is2faed.get(p)) {
-                if (AuthyUtils.verify2fa(p.getUniqueId(), args[0])) {
-                    p.sendTitle(ChatColor.GREEN+"验证通过",ChatColor.DARK_GREEN+"尽情玩耍吧",5,100,5);
-                    EusAuthy.is2faed.put(p, true);
-                    FileConfiguration remData = AuthyUtils.remData();
-                    String gameModeKey = p.getUniqueId().toString()+"."+"Gamemode";
+            if (EusAuthy.getDataInterface().isPlayerRegistered(p.getUniqueId())) {
+                if (!EusAuthy.is2faed.get(p)) {
+                    if (AuthyUtils.verify2fa(p.getUniqueId(), args[0])) {
+                        p.sendTitle(ChatColor.GREEN+"验证通过",ChatColor.DARK_GREEN+"尽情玩耍吧",5,100,5);
+                        EusAuthy.is2faed.put(p, true);
+                        FileConfiguration ramDataConfiguration = AuthyUtils.ramdata();
+                        String gameModeKey = p.getUniqueId().toString()+"."+"Gamemode";
 //                    String is2FAingKey = p.getUniqueId().toString()+"."+"is2FAing";
-                    String dataKey = p.getUniqueId().toString();
-                    p.setGameMode(GameMode.valueOf((String) remData.get(gameModeKey)));
-                    try {
-                        remData.set(dataKey, null);
-                        remData.save(new File(EusAuthy.plugin.getDataFolder(), "ramData.yml"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        String dataKey = p.getUniqueId().toString();
+                        p.setGameMode(GameMode.valueOf((String) ramDataConfiguration.get(gameModeKey)));
+                        try {
+                            ramDataConfiguration.set(dataKey, null);
+                            ramDataConfiguration.save(new File(EusAuthy.plugin.getDataFolder(), "ramData.yml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        return true;
+                    } else {
+                        p.sendMessage(ChatColor.RED+"验证码错误，请重试");
+                        return true;
                     }
-                    return true;
                 } else {
-                    p.sendMessage(ChatColor.RED+"验证码错误，请重试");
+                    p.sendMessage(ChatColor.RED+"你已经验证过啦，无需再次使用 /2FA");
                     return true;
                 }
             } else {
-                p.sendMessage(ChatColor.RED+"你已经验证过啦，无需再次使用 /2FA");
+                p.sendMessage(ChatColor.RED+"你还没有设置 EusAuthy，无需使用此命令");
                 return true;
             }
         } else {

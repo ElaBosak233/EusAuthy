@@ -5,6 +5,7 @@ import cn.ac.ela.eusauthy.cmd.CmdAuthy;
 import cn.ac.ela.eusauthy.lisenter.AuthyListener;
 import cn.ac.ela.eusauthy.sql.DataInterface;
 import cn.ac.ela.eusauthy.sql.SQLite;
+import cn.ac.ela.eusauthy.sql.YAML;
 import io.izzel.taboolib.loader.Plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -26,11 +27,14 @@ public class EusAuthy extends Plugin {
     public static JavaPlugin plugin;
     static DataInterface dataInterface;
 
+    // Player Stats
     public static Map<Player, Boolean> isCreatingAuthy = new HashMap<>();
     public static Map<Player, Boolean> isDeletingAuthy = new HashMap<>();
+    public static Map<Player, Boolean> is2faed = new HashMap<>();
+
+    // Player Data RAM
     public static Map<Player, String> secretKeyRAM = new HashMap<>();
     public static Map<Player, ItemMeta> qrMeta = new HashMap<>();
-    public static Map<Player, Boolean> is2faed = new HashMap<>();
 
     @Override
     public void onLoad() {

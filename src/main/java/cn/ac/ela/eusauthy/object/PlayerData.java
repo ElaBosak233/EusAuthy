@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.UUID;
 
+/**
+ * @author ElaBosak
+ */
 @Data
 public class PlayerData {
 

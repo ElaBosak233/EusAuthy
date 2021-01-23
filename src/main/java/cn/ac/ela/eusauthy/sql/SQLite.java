@@ -23,15 +23,14 @@ public class SQLite implements DataInterface {
         }
     }
 
-    public static boolean createTable(Connection con) throws SQLException {
+    public static void createTable(Connection con) throws SQLException {
         String sql = "create TABLE IF NOT EXISTS EusAuthy(uuid String, secretKey String); ";
         Statement stat = null;
         stat = con.createStatement();
         try {
             stat.executeUpdate(sql);
-            return true;
         } catch (SQLException e) {
-            return false;
+            e.printStackTrace();
         } finally {
             con.close();
         }
@@ -106,12 +105,11 @@ public class SQLite implements DataInterface {
         try {
             SQLite.Api api = new SQLite.Api();
             @Cleanup Connection con = api.getConnection();
-            insert(con, data.getUuid().toString(), data.getSecretKey());
+            return insert(con, data.getUuid().toString(), data.getSecretKey());
         } catch (SQLException e) {
             EusAuthy.plugin.getLogger().warning("EusAuthy 数据库错误");
             return false;
         }
-        return true;
     }
 
     @Override

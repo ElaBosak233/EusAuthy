@@ -2,6 +2,7 @@ package cn.ac.ela.eusauthy.cmd;
 
 import cn.ac.ela.eusauthy.EusAuthy;
 import cn.ac.ela.eusauthy.utils.Authenticator;
+import cn.ac.ela.eusauthy.utils.AuthyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,9 +10,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
@@ -24,21 +25,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author ElaBosak
+ */
 public class CmdAuthy implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if (args.length == 0) {
             sender.sendMessage(ChatColor.RED+"请输入 EusAuthy 子命令，或使用 /authy help 查看帮助");
             return true;
         }
+
         if (args[0].equalsIgnoreCase("remove")) {
             if (sender.hasPermission("authy.op") || sender instanceof ConsoleCommandSender) {
                 if (args.length == 2) {
                     Player target = Bukkit.getPlayer(args[1]);
                     assert target != null;
-                    if (EusAuthy.getDataInterface().deletePlayer(target.getUniqueId())) {
-                        sender.sendMessage(ChatColor.GREEN+"玩家数据删除成功");
+                    if (EusAuthy.getDataInterface().isPlayerRegistered(target.getUniqueId())) {
+                        if (EusAuthy.getDataInterface().deletePlayer(target.getUniqueId())) {
+                            sender.sendMessage(ChatColor.GREEN+"玩家数据删除成功");
+                            return true;
+                        } else {
+                            sender.sendMessage(ChatColor.RED+"玩家数据删除失败");
+                            return true;
+                        }
+                    } else {
+                        sender.sendMessage(ChatColor.RED+"玩家暂未创建 EusAuthy");
                         return true;
                     }
                 } else {
@@ -49,8 +63,8 @@ public class CmdAuthy implements TabExecutor {
                 sender.sendMessage(ChatColor.RED+"你没有执行此命令的权限");
                 return true;
             }
-            return true;
         }
+
         if (args[0].equalsIgnoreCase("create")) {
             if (sender instanceof Player && sender.hasPermission("authy.general")) {
                 Player p = (Player) sender;
@@ -70,7 +84,7 @@ public class CmdAuthy implements TabExecutor {
                                 ChatColor.GRAY+
                                 "1. 使用二步验证 APP 扫描副手上的二维码或输入以下 Secret Key \n"+
                                 "  "+secretKey+"\n"+
-                                "2. 在聊天框中输入即时验证码，完成创建\n"+
+                                "2. 在聊天框中输入即时验证码， 完成创建\n"+
                                 ChatColor.GREEN+
                                 "------------------- EusAuthy END -------------------\n"
                         );
@@ -104,6 +118,17 @@ public class CmdAuthy implements TabExecutor {
                         mapMeta.setMapView(view);
                         map.setItemMeta(mapMeta);
                         EusAuthy.qrMeta.put(p, map.getItemMeta());
+
+                        // save into RAM
+                        FileConfiguration ramDataConfiguration = AuthyUtils.ramdata();
+                        String qrMetaKey = p.getUniqueId().toString()+"."+"qrMeta";
+                        ramDataConfiguration.set(qrMetaKey, map.getItemMeta());
+                        try {
+                            ramDataConfiguration.save(new File(EusAuthy.plugin.getDataFolder(), "ramData.yml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                         p.getInventory().setItemInOffHand(map);
                         EusAuthy.isCreatingAuthy.put(p, true);
                     } else {
@@ -112,7 +137,7 @@ public class CmdAuthy implements TabExecutor {
                     }
                     return true;
                 } else {
-                    p.sendMessage(ChatColor.RED+"你已经设置 EusAuthy 了，请删除后方可重置 EusAuthy");
+                    p.sendMessage(ChatColor.RED+"你已经设置 EusAuthy 了， 请删除后方可重置 EusAuthy");
                     return true;
                 }
             } else {
@@ -120,6 +145,7 @@ public class CmdAuthy implements TabExecutor {
                 return true;
             }
         }
+
         if (args[0].equalsIgnoreCase("delete")) {
             if (sender instanceof Player && sender.hasPermission("authy.general")) {
                 Player p = (Player) sender;
@@ -128,7 +154,7 @@ public class CmdAuthy implements TabExecutor {
                     p.sendMessage(ChatColor.GOLD+
                             "------------------ EusAuthy START ------------------\n"+
                             ChatColor.GRAY+
-                            "1. 在聊天框中输入二步验证 APP 的验证码，完成删除\n"+
+                            "1. 在聊天框中输入二步验证 APP 的验证码， 完成删除\n"+
                             ChatColor.GOLD+
                             "------------------- EusAuthy END -------------------\n"
                     );
@@ -153,7 +179,7 @@ public class CmdAuthy implements TabExecutor {
                     ChatColor.BLUE+
                     "/authy remove <玩家名> —— 移除指定玩家 EusAuthy 二步验证\n"+
                     ChatColor.GRAY+
-                    "/2fa <code> —— 登录时使用，提供验证码以交互服务器\n"+
+                    "/2fa <code> —— 登录时使用， 提供验证码以交互服务器\n"+
                     ChatColor.GREEN+
                     "------------------ EusAuthy HELP -------------------\n"
             );

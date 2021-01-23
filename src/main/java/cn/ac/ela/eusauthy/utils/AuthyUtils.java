@@ -1,6 +1,7 @@
 package cn.ac.ela.eusauthy.utils;
 
 import cn.ac.ela.eusauthy.EusAuthy;
+import lombok.Cleanup;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,7 +20,7 @@ public class AuthyUtils {
         return Authenticator.getTOTPCode(EusAuthy.getDataInterface().getSecretKey(uuid)).equalsIgnoreCase(totp);
     }
 
-    public static FileConfiguration remData() {
+    public static FileConfiguration ramdata() {
         File ramDataFile = new File(EusAuthy.plugin.getDataFolder(), "ramData.yml");
         return YamlConfiguration.loadConfiguration(ramDataFile);
     }
