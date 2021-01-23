@@ -28,10 +28,16 @@ Database: SQLite #SQLite, JSON, YAML (默认 SQLite，目前仅 SQLite 可以使
 ## 版本说明 Versions
 
 ```
+v1.1.1 A Little Update
+- 🔨 添加 EusAuthy 中 onDisable 方法
+- 🔨 添加 bstats 统计数据
+- 🛠️ 去除 plugin.yml 中的 api-version
+- 🛠️ 将 Material.FILLED_MAP 改为 Material.MAP
+
 v1.1.0 Logic Update α
 - 🛠️ 修复以控制台异常为主的 BUG
 - 🛠️ 修复了二维码地图在使用 /authy create 后退出重进仍然存在的问题
-- 🛠️修复了使用 /authy create 后再使用 /2fa <code> 引起的逻辑错误
+- 🛠️ 修复了使用 /authy create 后再使用 /2fa <code> 引起的逻辑错误
 - 🛠️ 修复了源码 utils.AuthyUtils 中 ramData() 方法的命名，原本是 remData()，雷姆我老婆 🌻
 
 v1.0.0 Init EusAuthy
@@ -42,12 +48,17 @@ v1.0.0 Init EusAuthy
 
 | 🛠️ 插件正式版本 | 🌳 Minecraft 版本 | 🔗 下载链接 |
 | :----: | :----: | :----: |
-| 1.1.0 | 1.13~1.16.4 | [EusAuthy-1.1.0.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.0.0/EusAuthy-1.1.0.jar) |
+| 1.1.1 | 1.13~1.16.4 | [EusAuthy-1.1.1.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.1.1/EusAuthy-1.1.1.jar)
+| 1.1.0 | 1.13~1.16.4 | [EusAuthy-1.1.0.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.1.0/EusAuthy-1.1.0.jar) |
 | 1.0.0 | 1.13~1.16.4 | [EusAuthy-1.0.0.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.0.0/EusAuthy-1.0.0.jar) |  
+
+## 统计数据 Analysis
+
+![](https://bstats.org/signatures/bukkit/EusAuthy.svg)
 
 ## 开源协议 Open source
 
-<img src="https://i.loli.net/2021/01/17/dAN4wq9Htb7noEa.png"  alt="MIT License" width=50% height=50% />
+<img src="https://i.loli.net/2021/01/17/dAN4wq9Htb7noEa.png" width=50% height=50% />
 
 ## 参与比赛 Competition
 

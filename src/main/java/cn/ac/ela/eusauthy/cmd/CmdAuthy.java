@@ -89,7 +89,7 @@ public class CmdAuthy implements TabExecutor {
                                 "------------------- EusAuthy END -------------------\n"
                         );
                         EusAuthy.secretKeyRAM.put(p, secretKey);
-                        ItemStack map = new ItemStack(Material.FILLED_MAP);
+                        ItemStack map = new ItemStack(Material.MAP);
                         MapView view = EusAuthy.plugin.getServer().createMap(EusAuthy.plugin.getServer().getWorlds().get(0));
                         for(MapRenderer renderer : view.getRenderers()) {
                             view.removeRenderer(renderer);

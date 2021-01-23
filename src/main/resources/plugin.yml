@@ -3,7 +3,7 @@ main: ${main}
 version: ${version}
 authors: ['ElaBosak233']
 
-api-version: 1.13
+#api-version: 1.13
 
 lib-download: true
 lib-version: ${libVersion}

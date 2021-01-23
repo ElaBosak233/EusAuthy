@@ -5,8 +5,8 @@ import cn.ac.ela.eusauthy.cmd.CmdAuthy;
 import cn.ac.ela.eusauthy.lisenter.AuthyListener;
 import cn.ac.ela.eusauthy.sql.DataInterface;
 import cn.ac.ela.eusauthy.sql.SQLite;
-import cn.ac.ela.eusauthy.sql.YAML;
 import io.izzel.taboolib.loader.Plugin;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -74,12 +74,13 @@ public class EusAuthy extends Plugin {
                 getPlugin().getServer().getPluginManager().registerEvents(new AuthyListener(), getPlugin());
             }
         }.runTaskAsynchronously(plugin);
+        Metrics metrics = new Metrics(this.getPlugin(), 10088);
         getPlugin().getLogger().info("EusAuthy 加载成功");
     }
 
     @Override
     public void onDisable() {
-        //
+        getPlugin().getLogger().info("EusAuthy 卸载成功");
     }
 
     public static DataInterface getDataInterface() {
