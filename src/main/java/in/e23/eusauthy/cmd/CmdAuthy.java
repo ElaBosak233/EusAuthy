@@ -1,8 +1,8 @@
-package cn.ac.ela.eusauthy.cmd;
+package in.e23.eusauthy.cmd;
 
-import cn.ac.ela.eusauthy.EusAuthy;
-import cn.ac.ela.eusauthy.utils.Authenticator;
-import cn.ac.ela.eusauthy.utils.AuthyUtils;
+import in.e23.eusauthy.EusAuthy;
+import in.e23.eusauthy.utils.Authenticator;
+import in.e23.eusauthy.utils.AuthyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -108,7 +108,7 @@ public class CmdAuthy implements TabExecutor {
                                 canvas.drawImage(0,0,img);
                             }
                         });
-                        MapMeta mapMeta = ((MapMeta)map.getItemMeta());
+                        MapMeta mapMeta = (MapMeta) map.getItemMeta();
                         assert mapMeta != null;
                         mapMeta.setDisplayName("§6§lEusAuthy 二维码");
                         ArrayList<String> lore = new ArrayList<>();
@@ -185,7 +185,8 @@ public class CmdAuthy implements TabExecutor {
             );
             return true;
         }
-        return false;
+        sender.sendMessage(ChatColor.RED+"未知命令！ 请输入 /authy help 获取帮助");
+        return true;
     }
 
     @Override

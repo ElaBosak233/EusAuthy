@@ -1,11 +1,8 @@
-package cn.ac.ela.eusauthy.utils;
+package in.e23.eusauthy.utils;
 
-import cn.ac.ela.eusauthy.EusAuthy;
-import lombok.Cleanup;
-import org.bukkit.ChatColor;
+import in.e23.eusauthy.EusAuthy;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.UUID;

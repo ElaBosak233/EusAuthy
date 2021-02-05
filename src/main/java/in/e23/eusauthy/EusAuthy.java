@@ -1,11 +1,13 @@
-package cn.ac.ela.eusauthy;
+package in.e23.eusauthy;
 
-import cn.ac.ela.eusauthy.cmd.Cmd2FA;
-import cn.ac.ela.eusauthy.cmd.CmdAuthy;
-import cn.ac.ela.eusauthy.lisenter.AuthyListener;
-import cn.ac.ela.eusauthy.sql.DataInterface;
-import cn.ac.ela.eusauthy.sql.SQLite;
+import in.e23.eusauthy.cmd.Cmd2FA;
+import in.e23.eusauthy.cmd.CmdAuthy;
+import in.e23.eusauthy.lisenter.AuthyListener;
+import in.e23.eusauthy.sql.DataInterface;
+import in.e23.eusauthy.sql.SQLite;
+import in.e23.eusauthy.utils.Authenticator;
 import io.izzel.taboolib.loader.Plugin;
+import io.izzel.taboolib.module.dependency.*;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -22,10 +25,14 @@ import java.util.Map;
 /**
  * @author ElaBosak
  */
+@Dependency(maven = "de.taimos:totp:1.0")
+@Dependency(maven = "commons-codec:commons-codec:1.10")
+@Dependency(maven = "com.google.zxing:javase:3.2.1")
+@Dependency(maven = "com.google.zxing:core:3.2.1")
 public class EusAuthy extends Plugin {
 
     public static JavaPlugin plugin;
-    static DataInterface dataInterface;
+    public static DataInterface dataInterface;
 
     // Player Stats
     public static Map<Player, Boolean> isCreatingAuthy = new HashMap<>();

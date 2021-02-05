@@ -28,6 +28,11 @@ Database: SQLite #SQLite, JSON, YAML (默认 SQLite，目前仅 SQLite 可以使
 ## 版本说明 Versions
 
 ```
+v1.2.0 Light Operation
+- 🛠️ 轻量化插件体积，将依赖托付给 Taboolib 进行自动下载（我记得从 1M 左右变成了 79KB）
+```
+
+```
 v1.1.1 A Little Update
 - 🔨 添加 EusAuthy 中 onDisable 方法
 - 🔨 添加 bstats 统计数据
@@ -48,7 +53,8 @@ v1.0.0 Init EusAuthy
 
 | 🛠️ 插件正式版本 | 🌳 Minecraft 版本 | 🔗 下载链接 |
 | :----: | :----: | :----: |
-| 1.1.1 | 1.13~1.16.4 | [EusAuthy-1.1.1.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.1.1/EusAuthy-1.1.1.jar)
+| 1.2.0 | 1.13~1.16.4 | [EusAuthy-1.2.0.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.1.1/EusAuthy-1.2.0.jar) |
+| 1.1.1 | 1.13~1.16.4 | [EusAuthy-1.1.1.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.1.1/EusAuthy-1.1.1.jar) |
 | 1.1.0 | 1.13~1.16.4 | [EusAuthy-1.1.0.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.1.0/EusAuthy-1.1.0.jar) |
 | 1.0.0 | 1.13~1.16.4 | [EusAuthy-1.0.0.jar](https://github.com/ElaBosak233/EusAuthy/releases/download/1.0.0/EusAuthy-1.0.0.jar) |  
 

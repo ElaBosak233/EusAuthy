@@ -1,7 +1,7 @@
-package cn.ac.ela.eusauthy.cmd;
+package in.e23.eusauthy.cmd;
 
-import cn.ac.ela.eusauthy.EusAuthy;
-import cn.ac.ela.eusauthy.utils.AuthyUtils;
+import in.e23.eusauthy.EusAuthy;
+import in.e23.eusauthy.utils.AuthyUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;

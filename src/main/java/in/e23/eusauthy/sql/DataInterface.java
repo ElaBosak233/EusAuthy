@@ -1,8 +1,7 @@
-package cn.ac.ela.eusauthy.sql;
+package in.e23.eusauthy.sql;
 
-import cn.ac.ela.eusauthy.object.PlayerData;
+import in.e23.eusauthy.object.PlayerData;
 
-import java.io.IOException;
 import java.util.UUID;
 
 /**

@@ -1,4 +1,4 @@
-package cn.ac.ela.eusauthy.utils;
+package in.e23.eusauthy.utils;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -8,6 +8,7 @@ import com.google.zxing.common.BitMatrix;
 import de.taimos.totp.TOTP;
 import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.binary.Hex;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,6 +21,12 @@ import java.security.SecureRandom;
  * @author ElaBosak
  */
 public class Authenticator {
+
+    JavaPlugin plugin;
+
+    public Authenticator(JavaPlugin plugin) {
+        this.plugin = plugin;
+    }
 
     public static String generateSecretKey() {
         SecureRandom random = new SecureRandom();

@@ -1,4 +1,4 @@
-package cn.ac.ela.eusauthy;
+package in.e23.eusauthy;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

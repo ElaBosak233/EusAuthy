@@ -1,4 +1,4 @@
-package cn.ac.ela.eusauthy.object;
+package in.e23.eusauthy.object;
 
 import lombok.Data;
 
